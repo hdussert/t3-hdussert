@@ -1,0 +1,13 @@
+{
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["(?:cn|twMerge)\\(([^\\);]*)[\\);]", "[`'\"`]([^'\"`,;]*)[`'\"`]"],
+    ["classList={{([^;]*)}}", "\\s*?[\"'`]([^\"'`]*).*?:"],
+    "(?:enter|leave)(?:From|To)?=\\s*(?:\"|'|{`)([^(?:\"|'|`})]*)"
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "eslint.validate": ["javascript", "typescript"],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

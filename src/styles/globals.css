@@ -13,13 +13,6 @@ body,
   background: black;
 }
 
-.htmlScreen iframe {
-  width: 375px;
-  height: 804px;
-  border-radius: 45px;
-  background: black;
-}
-
-* {
-  background-color: #FF000009
-}
+/* * {
+  background-color: #ff000009;
+} */

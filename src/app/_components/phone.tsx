@@ -23,8 +23,6 @@ function Phone() {
         }}
       >
         <>
-          {/* <color args={["#241a1a"]} attach="background" /> */}
-
           <Environment preset="city" />
 
           <PresentationControls
