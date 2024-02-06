@@ -7,6 +7,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        display: ["Poppins", ...fontFamily.sans],
+        body: ["Inter", ...fontFamily.sans],
       },
     },
   },
