@@ -22,12 +22,10 @@ export const Hero = () => {
           réel atout pour votre équipe.
         </p>
         <div className="flex gap-4">
-          <Button className="uppercase" variant="outline" href="/contact">
+          <Button className="uppercase" variant="outline">
             Me contacter
           </Button>
-          <Button className="uppercase" href="/projects">
-            Voir mon CV
-          </Button>
+          <Button className="uppercase">Voir mon CV</Button>
         </div>
       </div>
       <div className={styles.phoneSection}>
