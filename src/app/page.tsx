@@ -1,131 +1,185 @@
-"use client";
-
 import { unstable_noStore as noStore } from "next/cache";
-import Phone from "./_components/phone";
-import { CardLink } from "./_components/card-link";
-import { cn } from "~/styles/helpers";
-import { Canvas } from "@react-three/fiber";
-import {
-  Center,
-  ContactShadows,
-  Edges,
-  Environment,
-  Float,
-  OrbitControls,
-  Outlines,
-  PresentationControls,
-  Sparkles,
-  SpotLight,
-  Stars,
-  Text3D,
-} from "@react-three/drei";
-import { ReactNode, Suspense, useEffect } from "react";
-import { useControls } from "leva";
+import { Experience } from "./_components/experience";
+import { Hero } from "./_components/hero";
+
 export default function Home() {
   noStore();
-  const boxes: ReactNode[] = [];
 
-  const { camera } = useControls({
-    camera: {
-      x: 0,
-      y: 1.5,
-      z: 20,
-    },
-  });
-
-  const text = useControls({
-    position: [0, 0, -10],
-    scale: [-1, 1, 1],
-    curveSegments: 24,
-    brevelSegments: 3,
-    bevelEnabled: true,
-    bevelSize: 0.08,
-    bevelThickness: 0.03,
-    height: 1,
-    lineHeight: 0.9,
-    letterSpacing: 0.3,
-  });
   return (
-    <main className={styles.mainWrapper}>
-      {/* <Suspense> */}
-      <div className="h-screen">
-        <Canvas
-          camera={{
-            fov: 45,
-            near: 0.1,
-            far: 2000,
-            position: [camera.x, camera.y, camera.z],
-          }}
-          className={styles.canvas}
-        >
-          <ambientLight intensity={0.5} />
-          <OrbitControls enableZoom />
+    <main className="m-auto max-w-screen-lg pt-16">
+      <Hero />
+      <Experience
+        titre="Développeur FullStack"
+        date="Juillet 2022 - Février 2024"
+        entreprise="Dalma"
+        entrepriseLogoRef="/assets/dalma.svg"
+        tags={[
+          "React",
+          "React Native",
+          "Next.js",
+          "Tailwind.css",
+          "Environnement AWS",
+          "Webflow",
+        ]}
+        description={
           <>
-            <Environment preset="city" />
-            <Center>
-              <Text3D
-                font={"./fonts/Poppins-ExtraBold.typeface.json"}
-                position={text.position}
-                scale={text.scale}
-                curveSegments={text.curveSegments}
-                brevelSegments={text.brevelSegments}
-                bevelEnabled
-                bevelSize={text.bevelSize}
-                bevelThickness={text.bevelThickness}
-                height={text.height}
-                lineHeight={text.lineHeight}
-                letterSpacing={text.letterSpacing}
-              >
-                Hugo Dussert
-                <meshToonMaterial c />
-                {/* <Edges threshold={8} /> */}
-                <Outlines />
-              </Text3D>
-              <Stars />
-              <Sparkles />
-            </Center>
-            <ContactShadows
-              position-y={-1.4}
-              opacity={0.4}
-              scale={5}
-              blur={2.4}
-            />
+            <p>
+              Dalma est une startup évoluant dans le secteur assurantiel,
+              c&apos;est une mutuelle pour animaux de compagnie.
+              <br />
+              Organisée en de multiple équipes agiles pluridisciplinaires, en
+              télétravail complet.
+              <br />
+              <br />
+              Cet environnement m&apos;a permit de cultivier d&apos;excellents
+              softskills:
+            </p>
+            <ul className="ml-6 list-disc">
+              <li>communication</li>
+              <li>proactivité</li>
+              <li>curiosité</li>
+              <li>implication</li>
+              <li>autonomie</li>
+              <li>adaptation</li>
+              <li>force de proposition</li>
+            </ul>
+            <br />
+            <p>
+              J&apos;ai eu la chance de contribuer à différents niveaux sur de
+              nombreux projets :
+            </p>
+            <ul className="ml-6 list-disc ">
+              <li>
+                Conception et développement d&apos;applications (web, mobile)
+              </li>
+              <li>
+                Conception et développement de services backend (APIs,
+                microservices, serverless)
+              </li>
+              <li>
+                Mise en place de processus pour le support technique (outillage,
+                documentation, formation)
+              </li>
+              <li>
+                Maintenance et évolution de l&apos;existant (refactoring,
+                optimisation)
+              </li>
+              <li>
+                Contribution aux processus et guidelines de l&apos;équipe
+                frontend (documentation, peer review)
+              </li>
+              <li>Analyse poussée de l&apos;impact des bugs, post-mortems</li>
+              <li>Proactivité dans les réunions de conception technique</li>
+            </ul>
           </>
-        </Canvas>
-      </div>
-      {/* </Suspense> */}
-      {/* <div className={styles.leftWrapper}>
-        <h1 className={styles.title}>Hugo Dussert</h1>
-        <div className={styles.cardsWrapper}>
-          <CardLink
-            href="https://create.t3.gg/en/usage/first-steps"
-            title="Mon blog"
-            description="Just the basics - Everything you need to know to set up your database and authentication."
-          />
-          <CardLink
-            href="https://create.t3.gg/en/introduction"
-            title="Me contacter"
-            description="Learn more about Create T3 App, the libraries it uses, and how to deploy it."
-          />
-        </div>
-      </div> */}
-      {/* <div>
-        <Phone />
-      </div> */}
+        }
+      />
+      <Experience
+        titre="Développeur Backend"
+        date="Décembre 2020 - Juin 2021"
+        entreprise="WeProov"
+        entrepriseLogoRef="/assets/placeloop.svg"
+        tags={["Go", "Environnement AWS", "Postman"]}
+        description={
+          <>
+            <p>
+              WeProov est une startup évoluant de le secteur assurentiel
+              automobile. <br />
+              Mettant à disposition une application de gestion flotte et de
+              sinistres.
+              <br />
+              au sein d&apos;équipes agiles pluridisciplinaires en constante
+              évolution.
+              <br />
+              <br />
+              Cet environnement m&apos;a permit de cultivier d&apos;excellents
+              softskills:
+            </p>
+            <ul className="ml-6 list-disc">
+              <li>
+                Conception, développement et maintient de services backend
+                (Lambdas, API Gateway, SQS)
+              </li>
+              <li>
+                Maintenance et évolution de l&apos;existant (refactoring,
+                optimisation)
+              </li>
+              <li>
+                Création de collections de tests d&apos;intégration (Postman)
+              </li>
+            </ul>
+            <br />
+          </>
+        }
+      />
+      <Experience
+        titre="Développeur Frontend"
+        date="Décembre 2020 - Juin 2021"
+        entreprise="Placeloop"
+        entrepriseLogoRef="/assets/placeloop.svg"
+        tags={["React", "AngularJS", "Jira"]}
+        description={
+          <>
+            <p>
+              Placeloop est une startup spécialisée dans le marketing digital.
+              <br />
+              <br />
+              Au sein d&apos;une jeune équipe constituée de 6 stagiaires et 1
+              CTO,
+              <br />
+              j&apos;ai eu l&apos;opportunité de m&apos;initier à la gestion de
+              projet et au management.
+              <br />
+              <br />
+              Mes missions:
+            </p>
+            <ul className="ml-6 list-disc ">
+              <li>Migration technique Angular vers un React</li>
+              <li>Refonte graphique, mise en place d&apos;un design system</li>
+              <li>Conception et développement de nouvelles fonctionnalités </li>
+              <li>
+                Analyse de parcours utilisateurs, conception de solutions UX
+              </li>
+              <li>
+                Animation des Sprints, gestion tickets de l&apos;équipe front
+              </li>
+            </ul>
+          </>
+        }
+      />
+      <h2 className="mt-12 font-display text-3xl">Formations</h2>
+      <Experience
+        titre="Architecte du numérique"
+        date="2018 - 2022"
+        entreprise="École 42"
+        entrepriseLogoRef="/assets/42.svg"
+        tags={["C", "Shell", "OpenGL"]}
+        description={<></>}
+      />
+      <Experience
+        titre="Junior Game programmer"
+        date="Juin 2021 - Aout 2021"
+        entreprise="Unity"
+        entrepriseLogoRef="/assets/unity.svg"
+        tags={["C#", "Unity", "Blender"]}
+        description={<></>}
+      />
+      <Experience
+        titre="License Informatique - L1, L2"
+        date="2015 - 2018"
+        entreprise="Faculté de Sciences"
+        entrepriseLogoRef="/assets/42.svg"
+        tags={["C++", "Python", "SQL", "Misc"]}
+        description={<></>}
+      />
+      <Experience
+        titre='"Bachelor of Engineering" - L1'
+        date="2014 - 2015"
+        entreprise="SUPINFO"
+        entrepriseLogoRef="/assets/SUPINFO.jpeg"
+        tags={[]}
+        description={<></>}
+      />
     </main>
   );
 }
-
-const styles = {
-  mainWrapper: cn(
-    "justify-stretch items-stretch min-h-screen  bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white",
-  ),
-  canvas: cn("w-full h-full"),
-  leftWrapper: cn(
-    "container flex flex-col items-center justify-around gap-12 px-4 py-16 ",
-  ),
-  title: cn(
-    "text-5xl font-extrabold tracking-tight sm:text-[5rem] font-display",
-  ),
-  cardsWrapper: cn("grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8"),
-};
