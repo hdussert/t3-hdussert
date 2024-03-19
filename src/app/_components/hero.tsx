@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/styles/helpers";
-import Phone from "./phone";
+import { Phone } from "./phone";
 
 export const Hero = () => {
   return (
@@ -28,17 +28,16 @@ export const Hero = () => {
           <Button className="uppercase">Voir mon CV</Button>
         </div>
       </div>
-      <div className={styles.phoneSection}>
+      <div className="flex-1">
         <Phone />
       </div>
     </div>
   );
 };
 const styles = {
-  heroWrapper: cn("flex flex-col sm:flex-row justify-center"),
+  heroWrapper: cn("flex"),
   titleSection: cn(
-    "container flex flex-2 flex-col items-center sm:items-start justify-around gap-12 px-4 py-16",
+    "flex flex-1 flex-col items-center sm:items-start justify-around gap-12 px-4 py-16 z-10",
   ),
-  phoneSection: cn("flex-1"),
   title: cn("text-5xl tracking-tight sm:text-[5rem] font-display"),
 };

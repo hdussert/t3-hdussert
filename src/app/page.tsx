@@ -6,7 +6,7 @@ export default function Home() {
   noStore();
 
   return (
-    <main className="m-auto max-w-screen-lg pt-16">
+    <main className="m-auto max-w-screen-lg">
       <Hero />
       <Experience
         titre="Développeur FullStack"
@@ -170,14 +170,6 @@ export default function Home() {
         entreprise="Faculté de Sciences"
         entrepriseLogoRef="/assets/42.svg"
         tags={["C++", "Python", "SQL", "Misc"]}
-        description={<></>}
-      />
-      <Experience
-        titre='"Bachelor of Engineering" - L1'
-        date="2014 - 2015"
-        entreprise="SUPINFO"
-        entrepriseLogoRef="/assets/SUPINFO.jpeg"
-        tags={[]}
         description={<></>}
       />
     </main>
