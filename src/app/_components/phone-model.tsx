@@ -6,15 +6,15 @@ const PHONE_MODEL_URL =
 export default function PhoneModel({
   children,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   const { scene } = useGLTF(PHONE_MODEL_URL);
 
   return (
     <primitive
       object={scene}
-      position-y={-1.2}
-      position-x={-0.1}
+      position-y={-1.34}
+      position-x={-0.17}
       position-z={0.0}
     >
       {children}

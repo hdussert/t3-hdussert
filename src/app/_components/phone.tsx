@@ -7,78 +7,114 @@ import {
   Html,
   PresentationControls,
 } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import React, { LegacyRef, Suspense, lazy, useEffect, useRef } from "react";
+import {
+  Canvas,
+  GroupProps,
+  Node,
+  ThreeElements,
+  useFrame,
+} from "@react-three/fiber";
+import { useControls } from "leva";
+import React, {
+  ReactNode,
+  RefObject,
+  Suspense,
+  lazy,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import * as THREE from "three";
 import { cn } from "~/lib/utils";
+
+const GroupLookingAtPointer = ({
+  canvasRef,
+  ...props
+}: GroupProps & { canvasRef: RefObject<HTMLDivElement> }) => {
+  const groupRef = useRef<THREE.Group | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const updateMousePosition = (ev: MouseEvent) => {
+      if (canvasRef.current) {
+        const rect = canvasRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: ev.clientX - (rect.left + rect.width / 2.0),
+          y: ev.clientY - (rect.top + rect.height / 2.0),
+        });
+      }
+    };
+
+    window.addEventListener("mousemove", updateMousePosition);
+
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition);
+    };
+  }, [canvasRef]);
+
+  useFrame(() => {
+    if (groupRef.current && canvasRef.current) {
+      const vector = new THREE.Vector3(
+        (mousePosition.x / canvasRef.current.clientWidth) * 2 - 1,
+        -(mousePosition.y / canvasRef.current.clientHeight) * 2 + 1,
+        5,
+      );
+      groupRef.current.lookAt(vector);
+    }
+  });
+  return (
+    <group {...props} ref={groupRef}>
+      {props.children}
+    </group>
+  );
+};
 
 const PhoneModel = lazy(() => import("../_components/phone-model"));
 export const Phone = () => {
-  const canvasRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const handleResize = () => {
-      if (canvasRef.current) {
-        const { top, left } = canvasRef.current.getBoundingClientRect();
-        if (!Number.isInteger(top) || !Number.isInteger(left)) {
-          canvasRef.current.style.marginLeft = "-0.5px";
-        } else {
-          canvasRef.current.style.marginLeft = "0px";
-        }
-      }
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const camera = {
+    fov: 45,
+    near: 0.1,
+    far: 2000,
+    position: [0, 5, 5],
+  } as const;
+
+  // ...
+  const canvasRef = useRef<HTMLDivElement | null>(null);
+
   return (
-    <Suspense fallback={null}>
-      <div ref={canvasRef} className="h-full w-full">
-        <Canvas
-          camera={{
-            fov: 70,
-            near: 0.1,
-            far: 2000,
-            position: [-3, 1.5, 4.0],
-          }}
-        >
+    <div ref={canvasRef} className="absolute bottom-0 right-0 top-0">
+      <Suspense fallback={null}>
+        <Canvas className="bg-blue-400" camera={camera}>
           <>
             <Environment preset="city" />
-
-            <PresentationControls
-              // global
-              // rotation={[0.13, 0.1, 0]}
-              polar={[-0.4, 0.4]}
-              azimuth={[-2.1, 0.8]}
-              // config={{ mass: 2, tension: 400 }}
-              // snap={{ mass: 4, tension: 400 }}
-            >
-              <Float rotationIntensity={0.4}>
-                <PhoneModel>
-                  <Html
-                    transform
-                    distanceFactor={1.17}
-                    position={[0.166, 1.335, 0.08]}
-                    scale={[1.37, 1.37, 1.0]}
-                  >
-                    <iframe
-                      className={cn(
-                        "pointer-events-none h-[804px] w-[375px] rounded-[45px] border-none bg-black",
-                      )}
-                      src="https://paldex.io/palworld/stats-calculator/"
-                    />
-                  </Html>
-                </PhoneModel>
-              </Float>
-            </PresentationControls>
+            <Float floatIntensity={3}>
+              <GroupLookingAtPointer canvasRef={canvasRef} position={[0, 0, 0]}>
+                <PhoneModel />
+                <Html
+                  transform
+                  distanceFactor={1.17}
+                  position={[0, 0, 0.08]}
+                  scale={[1.37, 1.37, 1.0]}
+                >
+                  <iframe
+                    className={cn(
+                      "pointer-events-none h-[804px] w-[375px] rounded-[45px] border-none bg-black",
+                    )}
+                    src="https://paldex.io/palworld/stats-calculator/"
+                  />
+                </Html>
+              </GroupLookingAtPointer>
+            </Float>
 
             <ContactShadows
-              position-y={-1.4}
+              position-y={-2}
               opacity={0.4}
               scale={5}
               blur={2.4}
             />
           </>
         </Canvas>
-      </div>
-    </Suspense>
+      </Suspense>
+    </div>
   );
 };

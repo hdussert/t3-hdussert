@@ -6,7 +6,7 @@ export default function Home() {
   noStore();
 
   return (
-    <main className="m-auto max-w-screen-lg">
+    <main>
       <Hero />
       <Experience
         titre="Développeur FullStack"
