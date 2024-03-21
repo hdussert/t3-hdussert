@@ -1,10 +1,8 @@
 import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
-
-import { TRPCReactProvider } from "~/trpc/react";
-import { ThemeProvider } from "./_components/theme-provider";
-import { ThemeToggle } from "./_components/theme-toggle";
+import { ThemeProvider } from "~/components/theme/theme-provider";
+import { ThemeSwitch } from "~/components/theme/theme-switch";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,15 +22,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ThemeToggle />
-      <body className={`font-sans ${inter.variable}`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+      <body
+        className={`font-sans ${inter.variable} relative transition-colors`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeSwitch />
+          {children}
         </ThemeProvider>
       </body>
     </html>

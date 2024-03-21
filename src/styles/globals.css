@@ -77,11 +77,11 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-display;
+    @apply bg-background font-display text-foreground;
   }
 }
 /* Custom Fonts */
 @font-face {
   font-family: Poppins;
-  src: url("./fonts/Poppins-ExtraBold.ttf") format("truetype");
+  src: url("./fonts/Poppins-Bold.ttf") format("truetype");
 }
