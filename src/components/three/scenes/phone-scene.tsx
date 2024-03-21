@@ -59,7 +59,7 @@ export const PhoneScene = () => {
                         className={cn(
                           "h-[1110px] w-[530px] rounded-[75px] border-none bg-black",
                         )}
-                        src={`http://localhost:3000?theme=${resolvedTheme === "dark" ? "light" : "dark"}`}
+                        src={`https://hdussert.vercel.app/?theme=${resolvedTheme === "dark" ? "light" : "dark"}`}
                       />
                     )}
                   </Html>
