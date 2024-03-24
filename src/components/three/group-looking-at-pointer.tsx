@@ -13,6 +13,8 @@ export const GroupLookingAtPointer = ({
 }: GroupLookingAtPointerProps) => {
   const groupRef = useRef<THREE.Group | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const currentPosition = useRef(new THREE.Vector3());
+
   useEffect(() => {
     const updateMousePosition = (ev: MouseEvent) => {
       setMousePosition({
@@ -22,7 +24,6 @@ export const GroupLookingAtPointer = ({
     };
 
     window.addEventListener("mousemove", updateMousePosition);
-
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
     };
@@ -45,7 +46,13 @@ export const GroupLookingAtPointer = ({
       // Unproject the NDC position to world coordinates
       const worldPosition = ndcPosition.unproject(props.cameraRef.current);
 
-      groupRef.current.lookAt(worldPosition);
+      const lerpSpeed = 0.075;
+      currentPosition.current = currentPosition.current.lerp(
+        worldPosition,
+        lerpSpeed,
+      );
+
+      groupRef.current.lookAt(currentPosition.current);
     }
   });
   return (
