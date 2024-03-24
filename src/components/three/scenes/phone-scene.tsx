@@ -12,12 +12,17 @@ import { useTheme } from "next-themes";
 import { Suspense, lazy, useRef } from "react";
 import { cn } from "~/lib/utils";
 import { GroupLookingAtPointer } from "../group-looking-at-pointer";
-
 const PhoneModel = lazy(() => import("../models/phone-model"));
 
-export const PhoneScene = () => {
+const iframeUrl =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "https://hdussert.vercel.app";
+
+export default function PhoneScene() {
+  const isInIframe =
+    typeof window !== "undefined" && window.self !== window.top;
   const { resolvedTheme } = useTheme();
-  const isInIframe = typeof window !== "undefined" && window !== window.parent;
 
   const camera = {
     fov: 45,
@@ -27,49 +32,38 @@ export const PhoneScene = () => {
   } as const;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
-  return (
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  return isInIframe ? null : (
     <Suspense fallback={null}>
-      <Canvas ref={canvasRef} camera={camera}>
+      <Canvas ref={canvasRef} camera={camera} className={cn("touch-none")}>
         <>
-          <PerspectiveCamera ref={cameraRef} makeDefault {...camera} />
+          <PerspectiveCamera makeDefault {...camera} />
           <Environment preset="city" />
           <Float floatIntensity={2}>
-            <group position={[1, 0, 0]}>
-              <GroupLookingAtPointer
-                cameraRef={cameraRef}
-                canvasRef={canvasRef}
-                position={[0, 0, 0]}
-              >
-                <PhoneModel>
-                  <Html
-                    transform
-                    distanceFactor={1.17}
-                    position={[0.16, 1.34, 0.08]}
-                    scale={[1, 1, 1.0]}
-                  >
-                    {isInIframe ? (
-                      <div
-                        className={cn(
-                          "h-[1110px] w-[530px] rounded-[75px] border-none bg-primary",
-                        )}
-                      ></div>
-                    ) : (
-                      <iframe
-                        className={cn(
-                          "h-[1110px] w-[530px] rounded-[75px] border-none bg-black",
-                        )}
-                        src={`https://hdussert.vercel.app/?theme=${resolvedTheme === "dark" ? "light" : "dark"}`}
-                      />
+            <GroupLookingAtPointer canvasRef={canvasRef} position={[1, 0.4, 0]}>
+              <PhoneModel>
+                <Html
+                  transform
+                  distanceFactor={1.17}
+                  position={[0.16, 1.34, 0.08]}
+                  scale={[1.23, 1.23, 1.0]}
+                >
+                  <iframe
+                    ref={iframeRef}
+                    className={cn(
+                      "h-[900px] w-[430px] select-none rounded-[55px] border-none bg-black", // 2.09433962264 (ratio)
                     )}
-                  </Html>
-                </PhoneModel>
-              </GroupLookingAtPointer>
-            </group>
+                    src={iframeUrl}
+                    loading="lazy"
+                    sandbox="allow-same-origin allow-scripts"
+                  />
+                </Html>
+              </PhoneModel>
+            </GroupLookingAtPointer>
           </Float>
 
           <ContactShadows
-            position-y={-2}
+            position-y={-1.5}
             opacity={0.4}
             scale={10}
             blur={2.4}
@@ -79,4 +73,4 @@ export const PhoneScene = () => {
       </Canvas>
     </Suspense>
   );
-};
+}

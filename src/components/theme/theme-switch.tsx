@@ -4,10 +4,11 @@ import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 
 import { useEffect, useState } from "react";
+import { cn } from "~/lib/utils";
 import { Switch } from "../ui/switch";
 
 export function ThemeSwitch() {
-  const { setTheme, resolvedTheme } = useTheme();
+  const { setTheme: setThemeNext, resolvedTheme } = useTheme();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -18,10 +19,23 @@ export function ThemeSwitch() {
     return null;
   }
 
-  // Rest of your component
+  const setTheme = (newTheme: "light" | "dark") => {
+    setThemeNext(newTheme);
+
+    // Sync theme between iframe and parent
+    const oldTheme = newTheme === "light" ? "dark" : "light";
+    window.dispatchEvent(
+      new StorageEvent("storage", {
+        key: "theme",
+        oldValue: oldTheme,
+        newValue: newTheme,
+      }),
+    );
+  };
+
   return (
     <Switch
-      className="absolute right-4 top-4 z-10"
+      className={cn("absolute right-4 top-4 z-10")}
       iconUnchecked={<SunIcon />}
       iconChecked={<MoonIcon />}
       defaultChecked={resolvedTheme === "dark"}

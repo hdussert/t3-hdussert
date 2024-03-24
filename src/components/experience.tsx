@@ -16,6 +16,7 @@ type ExperienceProps = {
   entreprise: string;
   entrepriseLogoRef: string;
   tags: string[];
+  location: string;
 };
 
 export const Experience = ({
@@ -25,25 +26,29 @@ export const Experience = ({
   entreprise,
   entrepriseLogoRef,
   tags,
+  location,
 }: ExperienceProps) => {
   return (
     <Card className={cn("bg-primary-foreground")}>
-      <CardHeader>
-        <div className="flex flex-col sm:flex-row sm:items-center  sm:justify-between">
-          <p className="font-display text-2xl">{titre}</p>
-          <p className="font-body">{date}</p>
+      <CardHeader className={cn("flex-row items-start justify-between")}>
+        <div className={cn("flex flex-col")}>
+          <p className={cn("font-display text-xl")}>{titre}</p>
+          <p className={cn("font-display uppercase text-muted-foreground")}>
+            {date}
+          </p>
+          <p>{location}</p>
         </div>
-        <div className="flex flex-row items-center gap-2">
-          <Avatar className="h-6 w-6">
+        <div className={cn("flex flex-row items-center gap-2")}>
+          <Avatar className={cn("h-6 w-6")}>
             <AvatarImage src={entrepriseLogoRef} alt="Hugo Dussert" />
             <AvatarFallback>D</AvatarFallback>
           </Avatar>
-          <h2 className="text-l font-display">{entreprise}</h2>
+          <h2 className={cn("text-l font-display")}>{entreprise}</h2>
         </div>
       </CardHeader>
-      <CardContent className="mx-6 rounded-lg">{description}</CardContent>
+      <CardContent className={cn("rounded-lg")}>{description}</CardContent>
       <CardFooter>
-        <div className="flex flex-wrap gap-1">
+        <div className={cn("flex flex-wrap gap-1")}>
           {tags.map((tag) => (
             <Badge key={tag}>{tag}</Badge>
           ))}

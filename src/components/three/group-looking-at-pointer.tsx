@@ -1,10 +1,9 @@
-import { useFrame, type GroupProps } from "@react-three/fiber";
+import { useFrame, useThree, type GroupProps } from "@react-three/fiber";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import * as THREE from "three";
 
 type GroupLookingAtPointerProps = GroupProps & {
   canvasRef: RefObject<HTMLCanvasElement>;
-  cameraRef: RefObject<THREE.PerspectiveCamera>;
 };
 
 export const GroupLookingAtPointer = ({
@@ -14,7 +13,7 @@ export const GroupLookingAtPointer = ({
   const groupRef = useRef<THREE.Group | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const currentPosition = useRef(new THREE.Vector3());
-
+  const { camera } = useThree();
   useEffect(() => {
     const updateMousePosition = (ev: MouseEvent) => {
       setMousePosition({
@@ -24,13 +23,14 @@ export const GroupLookingAtPointer = ({
     };
 
     window.addEventListener("mousemove", updateMousePosition);
+
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
     };
   }, []);
 
   useFrame(() => {
-    if (groupRef.current && canvasRef.current && props.cameraRef.current) {
+    if (groupRef.current && canvasRef.current) {
       // Get the center of the canvas (in screen space)
       const canvasRect = canvasRef.current.getBoundingClientRect();
 
@@ -44,7 +44,7 @@ export const GroupLookingAtPointer = ({
       const ndcPosition = new THREE.Vector3(ndcX, ndcY, 0.95); // 0.5 means that the position is in the middle of the near and far clipping plane
 
       // Unproject the NDC position to world coordinates
-      const worldPosition = ndcPosition.unproject(props.cameraRef.current);
+      const worldPosition = ndcPosition.unproject(camera);
 
       const lerpSpeed = 0.075;
       currentPosition.current = currentPosition.current.lerp(

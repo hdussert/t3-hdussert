@@ -1,37 +1,27 @@
 "use client";
+
+import dynamic from "next/dynamic";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
-import { PhoneScene } from "./three/scenes/phone-scene";
+
+const PhoneScene = dynamic(() => import("./three/scenes/phone-scene"), {
+  ssr: false,
+});
 
 export const Hero = () => {
-  // const mainRef = useRef<HTMLDivElement>(null);
-
-  // // Make sure subpixel calculation are not being used
-  // useEffect(() => {
-  //   const adjustMargin = () => {
-  //     if (mainRef.current) {
-  //       const windowWidth = window.innerWidth;
-  //       const divMaxWidth = 1024;
-
-  //       const margin = (windowWidth - divMaxWidth) / 2;
-
-  //       mainRef.current.style.marginLeft = `${Math.floor(margin)}px`;
-  //       mainRef.current.style.marginRight = `${Math.round(margin)}px`;
-  //     }
-  //   };
-
-  //   adjustMargin();
-
-  //   window.addEventListener("resize", adjustMargin);
-  //   return () => window.removeEventListener("resize", adjustMargin);
-  // }, []);
+  const scrollToExperiences = () => {
+    const resume = document.getElementById("experiences");
+    if (resume) {
+      window.scrollTo({
+        top: resume.offsetTop - 50,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
-    <div
-      // ref={mainRef}
-      className={cn("relative flex min-h-screen")}
-    >
-      <div className={cn("m-auto flex max-w-screen-lg")}>
+    <div className={cn("relative flex min-h-screen")}>
+      <div className={cn("z-10 m-auto flex max-w-screen-lg")}>
         <div className={styles.titleSection}>
           <div className={cn("flex flex-col gap-2")}>
             <p className={cn("font-display uppercase text-muted-foreground")}>
@@ -45,16 +35,22 @@ export const Hero = () => {
             Next.js et TypeScript. Communiquant, curieux et force de
             proposition, je serai un véritable atout pour votre équipe.
           </p>
-          <div className="flex gap-4">
-            <Button className="uppercase" variant="outline">
-              Me contacter
+          <div className={cn("flex gap-4")}>
+            <Button
+              className={cn("uppercase")}
+              variant="outline"
+              asChild={true}
+            >
+              <a href="mailto:hugo.dussertsarthe@gmail.com">Me contacter</a>
             </Button>
-            <Button className="uppercase">Voir mon CV</Button>
+            <Button className={cn("uppercase")} onClick={scrollToExperiences}>
+              Voir mon CV
+            </Button>
           </div>
         </div>
-        <div className="flex-1"></div>
+        <div className={cn("flex-1")}></div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 top-0 z-[-1]">
+      <div className={cn("absolute bottom-[-20vh] left-0 right-0 top-0")}>
         <PhoneScene />
       </div>
     </div>
