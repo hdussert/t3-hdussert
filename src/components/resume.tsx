@@ -146,7 +146,7 @@ export const Resume = () => {
   return (
     <div
       className={cn(
-        "mx-auto mb-24 flex max-w-screen-lg flex-col gap-6 px-2 sm:px-6",
+        "mx-auto mb-12 flex max-w-screen-lg flex-col gap-6 px-2 sm:px-6",
       )}
     >
       <h2 className={cn("mt-6 font-display text-3xl")} id="experiences">

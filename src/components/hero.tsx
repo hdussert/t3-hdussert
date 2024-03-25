@@ -21,7 +21,7 @@ export const Hero = () => {
 
   return (
     <div className={cn("relative flex min-h-screen")}>
-      <div className={cn("z-10 m-auto flex max-w-screen-lg")}>
+      <div className={cn("m-auto flex max-w-screen-lg")}>
         <div className={styles.titleSection}>
           <div className={cn("flex flex-col gap-2")}>
             <p className={cn("font-display uppercase text-muted-foreground")}>
@@ -50,7 +50,11 @@ export const Hero = () => {
         </div>
         <div className={cn("flex-1")}></div>
       </div>
-      <div className={cn("absolute bottom-[-20vh] left-0 right-0 top-0")}>
+      <div
+        className={cn(
+          "absolute bottom-[-20vh] left-0 right-0 top-0 z-10 hidden sm:block",
+        )}
+      >
         <PhoneScene />
       </div>
     </div>
@@ -58,7 +62,7 @@ export const Hero = () => {
 };
 const styles = {
   titleSection: cn(
-    "flex flex-1 flex-col items-center sm:items-start justify-around gap-12 px-4 py-16 z-10",
+    "flex flex-1 flex-col items-center sm:items-start justify-around gap-12 px-4 py-16 z-20",
   ),
   title: cn("text-5xl tracking-tight sm:text-[5rem] font-display"),
   description: cn("text-muted-foreground"),

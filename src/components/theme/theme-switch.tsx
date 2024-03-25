@@ -35,7 +35,7 @@ export function ThemeSwitch() {
 
   return (
     <Switch
-      className={cn("absolute right-4 top-4 z-10")}
+      className={cn("absolute right-4 top-4 z-20")}
       iconUnchecked={<SunIcon />}
       iconChecked={<MoonIcon />}
       defaultChecked={resolvedTheme === "dark"}

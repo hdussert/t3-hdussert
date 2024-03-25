@@ -36,7 +36,7 @@ export const Experience = ({
           <p className={cn("font-display uppercase text-muted-foreground")}>
             {date}
           </p>
-          <p>{location}</p>
+          <p className="italic text-muted-foreground">{location}</p>
         </div>
         <div className={cn("flex flex-row items-center gap-2")}>
           <Avatar className={cn("h-6 w-6")}>
