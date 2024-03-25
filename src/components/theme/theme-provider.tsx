@@ -7,9 +7,17 @@ import { useEffect, useState } from "react";
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const isClient = typeof window !== "undefined";
   const isInIframe = isClient && window.self !== window.top;
+
   const localStorageTheme = isClient ? localStorage.getItem("theme") : null;
+  const userSystemTheme = isClient
+    ? window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light"
+    : null;
+  const initialTheme = localStorageTheme ?? userSystemTheme ?? "light";
+
   const [iframeTheme, setIframeTheme] = useState(
-    localStorageTheme === "dark" ? "light" : "dark",
+    initialTheme === "dark" ? "light" : "dark",
   );
 
   useEffect(() => {
