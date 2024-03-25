@@ -24,6 +24,11 @@ const config = {
         display: ["Poppins", ...fontFamily.sans],
         body: ["Inter", ...fontFamily.sans],
       },
+      textShadow: {
+        sm: "0 1px 2px var(--tw-shadow-color)",
+        DEFAULT: "0 2px 4px var(--tw-shadow-color)",
+        lg: "0 8px 16px var(--tw-shadow-color)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -80,7 +85,21 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    // @ts-expect-error - No types available
+    function ({ addComponents }) {
+      const newComponents = {
+        ".no-scrollbar": {
+          "-webkit-scrollbar": "none" /* WebKit */,
+          "-ms-overflow-style": "none" /* IE and Edge */,
+          scrollbarWidth: "none" /* Firefox */,
+        },
+      };
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      addComponents(newComponents);
+    },
+  ],
 } satisfies Config;
 
 export default config;
