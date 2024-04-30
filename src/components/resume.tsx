@@ -163,8 +163,8 @@ export const Resume = () => {
       >
         {educations.map((education, i) => (
           <Fragment key={education.school}>
-            {i === educations.length - 1 ? null : <hr />}
             <Education {...education} />
+            {i === educations.length - 1 ? null : <hr />}
           </Fragment>
         ))}
       </div>
