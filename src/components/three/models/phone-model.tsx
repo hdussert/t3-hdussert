@@ -1,7 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 
-const PHONE_MODEL_URL =
-  "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/iphone-x/model.gltf";
+const PHONE_MODEL_URL = "./assets/iphone-x.gltf";
 
 export default function PhoneModel({
   children,
