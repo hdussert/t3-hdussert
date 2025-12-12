@@ -24,24 +24,16 @@ const Switch = React.forwardRef<
     {...props}
     ref={ref}
   >
-    <SwitchPrimitives.Thumb
-      className={cn(
-        "pointer-events-none flex h-5 w-5 items-center justify-center rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0",
-      )}
-    >
+    <SwitchPrimitives.Thumb className="pointer-events-none flex h-5 w-5 items-center justify-center rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0">
       <div
         data-state={props.checked ? "checked" : "unchecked"}
-        className={cn(
-          "data-[state=checked]:visible data-[state=unchecked]:hidden",
-        )}
+        className="data-[state=checked]:visible data-[state=unchecked]:hidden"
       >
         {iconChecked}
       </div>
       <div
         data-state={props.checked ? "checked" : "unchecked"}
-        className={cn(
-          "data-[state=unchecked]:visible data-[state=checked]:hidden",
-        )}
+        className="data-[state=unchecked]:visible data-[state=checked]:hidden"
       >
         {iconUnchecked}
       </div>

@@ -10,7 +10,6 @@ import {
 import { Canvas } from "@react-three/fiber";
 import { useTheme } from "next-themes";
 import { Suspense, lazy, useRef } from "react";
-import { cn } from "~/lib/utils";
 import { GroupLookingAtPointer } from "../group-looking-at-pointer";
 const PhoneModel = lazy(() => import("../models/phone-model"));
 
@@ -35,7 +34,7 @@ export default function PhoneScene() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   return isInIframe ? null : (
     <Suspense fallback={null}>
-      <Canvas ref={canvasRef} camera={camera} className={cn("touch-none")}>
+      <Canvas ref={canvasRef} camera={camera} className="touch-none">
         <>
           <PerspectiveCamera makeDefault {...camera} />
           <Environment preset="city" />
@@ -50,9 +49,7 @@ export default function PhoneScene() {
                 >
                   <iframe
                     ref={iframeRef}
-                    className={cn(
-                      "h-[900px] w-[430px] select-none rounded-[55px] border-none bg-black", // 2.09433962264 (ratio)
-                    )}
+                    className="h-[900px] w-[430px] select-none rounded-[55px] border-none bg-black" // 2.09433962264 (ratio)
                     src={iframeUrl}
                     loading="lazy"
                     sandbox="allow-same-origin allow-scripts"

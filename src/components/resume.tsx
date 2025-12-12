@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import { Education } from "~/components/education";
 import { Experience } from "~/components/experience";
-import { cn } from "~/lib/utils";
 
 const experiences = [
   {
@@ -28,7 +27,7 @@ const experiences = [
           <br />
         </p>
         <p>Mes missions :</p>
-        <ul className={cn("ml-6 list-disc ")}>
+        <ul className="ml-6 list-disc">
           <li>Conception et développement d&apos;applications web et mobile</li>
           <li>
             Conception et développement de services backend (APIs, lambdas...)
@@ -45,7 +44,7 @@ const experiences = [
         </ul>
         <br />
         <p>J&apos;ai pu y cultiver d&apos;excellents softskills:</p>
-        <ul className={cn("ml-6 list-disc")}>
+        <ul className="ml-6 list-disc">
           <li>communication</li>
           <li>proactivité</li>
           <li>curiosité</li>
@@ -70,7 +69,7 @@ const experiences = [
           <br />
           Mes missions:
         </p>
-        <ul className={cn("ml-6 list-disc")}>
+        <ul className="ml-6 list-disc">
           <li>
             Conception, développement et maintient de services backend (Lambdas,
             API Gateway, SQS)
@@ -106,7 +105,7 @@ const experiences = [
           <br />
           Mes missions:
         </p>
-        <ul className={cn("ml-6 list-disc")}>
+        <ul className="ml-6 list-disc">
           <li>Migration technique Angular vers un React</li>
           <li>Refonte graphique, mise en place d&apos;un design system</li>
           <li>Conception et développement de nouvelles fonctionnalités </li>
@@ -144,23 +143,15 @@ const educations = [
 
 export const Resume = () => {
   return (
-    <div
-      className={cn(
-        "mx-auto mb-12 flex max-w-screen-lg flex-col gap-6 px-2 sm:px-6",
-      )}
-    >
-      <h2 className={cn("mt-6 font-display text-3xl")} id="experiences">
+    <div className="mx-auto mb-12 flex max-w-screen-lg flex-col gap-6 px-2 sm:px-6">
+      <h2 className="mt-6 font-display text-3xl" id="experiences">
         Expériences
       </h2>
       {experiences.map((experience) => (
         <Experience key={experience.entreprise} {...experience} />
       ))}
-      <h2 className={cn("mt-6 font-display text-3xl")}>Formations</h2>
-      <div
-        className={cn(
-          "no-scrollbar flex w-full flex-col gap-4 overflow-y-scroll",
-        )}
-      >
+      <h2 className="mt-6 font-display text-3xl">Formations</h2>
+      <div className="no-scrollbar flex w-full flex-col gap-4 overflow-y-scroll">
         {educations.map((education, i) => (
           <Fragment key={education.school}>
             <Education {...education} />
