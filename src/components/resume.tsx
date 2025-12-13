@@ -60,7 +60,7 @@ const experiences = [
     date: "Déc. 2020 - Juin 2021",
     location: "Full remote",
     entreprise: "WeProov",
-    entrepriseLogoRef: "/assets/placeloop.svg",
+    entrepriseLogoRef: "/assets/weproov.svg",
     tags: ["Go", "Environnement AWS", "Postman"],
     description: (
       <>
