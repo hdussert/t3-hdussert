@@ -2,34 +2,20 @@
 
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
-
 import { useEffect, useState } from "react";
-import { Switch } from "../ui/switch";
+
+import { Switch } from "~/components/ui/switch";
 
 export function ThemeSwitch() {
-  const { setTheme: setThemeNext, resolvedTheme } = useTheme();
-  const [isClient, setIsClient] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null; // SSR-safe
 
-  if (!isClient) {
-    return null;
-  }
-
-  const setTheme = (newTheme: "light" | "dark") => {
-    setThemeNext(newTheme);
-
-    // Sync theme between iframe and parent
-    const oldTheme = newTheme === "light" ? "dark" : "light";
-    window.dispatchEvent(
-      new StorageEvent("storage", {
-        key: "theme",
-        oldValue: oldTheme,
-        newValue: newTheme,
-      }),
-    );
+  const handleSwitch = (checked: boolean) => {
+    const next = checked ? "dark" : "light";
+    setTheme(next);
   };
 
   return (
@@ -37,15 +23,8 @@ export function ThemeSwitch() {
       className="absolute right-4 top-4 z-20"
       iconUnchecked={<SunIcon />}
       iconChecked={<MoonIcon />}
-      defaultChecked={resolvedTheme === "dark"}
-      checked={resolvedTheme === "dark"}
-      onCheckedChange={(checked) => {
-        if (checked) {
-          setTheme("dark");
-        } else {
-          setTheme("light");
-        }
-      }}
+      checked={theme === "dark"}
+      onCheckedChange={handleSwitch}
     />
   );
 }
