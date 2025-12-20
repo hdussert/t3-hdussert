@@ -5,7 +5,7 @@ import Section from "~/components/Section";
 import SectionTitle from "~/components/SectionTitle";
 import Project from "./Project";
 import PROJECTS from "./project-data";
-import { ProjectData } from "./project-types";
+import type { ProjectData } from "./project-types";
 
 const PhoneScene = dynamic(
   () => import("~/components/three/scenes/PhoneScene"),

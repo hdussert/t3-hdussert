@@ -1,4 +1,4 @@
-import { EducationData } from "./education-types";
+import type { EducationData } from "./education-types";
 
 type EducationProps = EducationData;
 

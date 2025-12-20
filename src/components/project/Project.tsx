@@ -1,10 +1,10 @@
-import { ProjectData } from "./project-types";
+import type { ProjectData } from "./project-types";
 
 type ProjectProps = ProjectData & {
   onClick?: () => void;
 };
 
-const Project = ({ title, description, url, onClick }: ProjectProps) => {
+const Project = ({ title, description, onClick }: ProjectProps) => {
   return (
     <div
       key={title}

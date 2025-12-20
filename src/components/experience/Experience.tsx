@@ -1,7 +1,7 @@
 import BadgeList from "~/components/BadgeList";
 import ExternalLink from "~/components/ExternalLink";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
-import { ExperienceData } from "./experience-type";
+import type { ExperienceData } from "./experience-type";
 
 type ExperienceProps = ExperienceData;
 

@@ -47,11 +47,11 @@ export const GroupLookingAtPointer = ({
       _iframeRef.removeEventListener("mouseenter", mouseEnterHandler);
       _iframeRef.removeEventListener("mouseleave", mouseLeaveHandler);
     };
-  }, [iframeRef?.current]);
+  }, [iframeRef]);
 
   useFrame(() => {
     if (groupRef.current && canvasRef.current) {
-      let ndc = new THREE.Vector3(0, 0, 0.95);
+      const ndc = new THREE.Vector3(0, 0, 0.95);
       let lerpSpeed = 0.075;
       if (isMouseOverIframe) {
         // If the mouse is over an iframe, it should look forward

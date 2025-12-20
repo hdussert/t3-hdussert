@@ -64,7 +64,7 @@ export default function PhoneScene({ url }: { url?: string }) {
                   <Iframe
                     className="no-scrollbar mr-[16px] size-full pr-[-16px]"
                     ref={iframeRef}
-                    url={url || "/"}
+                    url={url ?? "/"}
                   />
                 </Html>
               </AnimatedGroup>
