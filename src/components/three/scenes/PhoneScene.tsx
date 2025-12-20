@@ -29,6 +29,11 @@ function AnimatedGroup({ children }: { children: React.ReactNode }) {
   );
 }
 
+const DEFAULT_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "https://hdussert.vercel.app";
+
 export default function PhoneScene({ url }: { url?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -44,7 +49,7 @@ export default function PhoneScene({ url }: { url?: string }) {
     <div className="absolute bottom-[-20vh] left-0 right-0 top-0 hidden sm:block">
       <Canvas ref={canvasRef} camera={camera} className="touch-none">
         <PerspectiveCamera makeDefault {...camera} />
-        <Environment preset="city" />
+        <Environment preset="studio" />
         <Float floatIntensity={1}>
           <GroupLookingAtPointer
             canvasRef={canvasRef}
@@ -64,7 +69,7 @@ export default function PhoneScene({ url }: { url?: string }) {
                   <Iframe
                     className="no-scrollbar mr-[16px] size-full pr-[-16px]"
                     ref={iframeRef}
-                    url={url ?? "/"}
+                    url={url || DEFAULT_URL}
                   />
                 </Html>
               </AnimatedGroup>

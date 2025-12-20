@@ -1,5 +1,5 @@
 import { Loader } from "lucide-react";
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { cn } from "~/lib/utils";
 
 type IframeProps = {
@@ -10,12 +10,9 @@ type IframeProps = {
 const Iframe = forwardRef<HTMLIFrameElement, IframeProps>(
   ({ url, className }, ref) => {
     const [isLoading, setIsLoading] = useState(true);
-    const urlRef = useRef(url);
 
     useEffect(() => {
-      if (urlRef.current === url) return;
       setIsLoading(true);
-      urlRef.current = url;
     }, [url]);
 
     return (
@@ -28,7 +25,7 @@ const Iframe = forwardRef<HTMLIFrameElement, IframeProps>(
         <iframe
           ref={ref}
           className="h-full w-[calc(100%+16px)]"
-          src={urlRef.current}
+          src={url}
           onLoad={() => setIsLoading(false)}
           sandbox="allow-same-origin allow-scripts"
         />

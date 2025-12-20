@@ -27,6 +27,7 @@ const Hero = () => {
 
       <a
         href="#projects"
+        target="_self"
         className="absolute bottom-10 animate-pulse transition-all hover:scale-110 hover:animate-none"
       >
         <ArrowDownCircle className="h-10 w-10 stroke-1" />
