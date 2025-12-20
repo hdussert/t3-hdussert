@@ -20,4 +20,5 @@ export default function PhoneModel({
     </primitive>
   );
 }
+
 useGLTF.preload(PHONE_MODEL_URL);
