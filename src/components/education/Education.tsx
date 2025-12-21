@@ -5,8 +5,8 @@ type EducationProps = EducationData;
 const Education = ({ title, date, school }: EducationProps) => {
   return (
     <div className="flex items-center">
-      <div className="flex flex-1  flex-col border-r p-4 text-right sm:max-w-72">
-        <p className="whitespace-nowrap  font-display uppercase text-muted-foreground">
+      <div className="flex flex-1 flex-col border-r p-4 text-right sm:max-w-72">
+        <p className="font-display text-muted-foreground whitespace-nowrap uppercase">
           {date}
         </p>
       </div>

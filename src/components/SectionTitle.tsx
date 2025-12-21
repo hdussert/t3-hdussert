@@ -7,7 +7,7 @@ const SectionTitle = ({
   ...props
 }: HTMLAttributes<HTMLHeadingElement>) => {
   return (
-    <h2 className={cn("mb-5 font-display text-3xl", className)} {...props}>
+    <h2 className={cn("font-display mb-5 text-3xl", className)} {...props}>
       {children}
     </h2>
   );

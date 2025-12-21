@@ -3,14 +3,14 @@ import Section from "~/components/Section";
 
 const Hero = () => {
   return (
-    <Section className="relative flex h-screen w-full  flex-col items-center justify-center gap-16 sm:flex-row sm:gap-24">
+    <Section className="relative flex h-screen w-full flex-col items-center justify-center gap-16 sm:flex-row sm:gap-24">
       <div className="flex flex-col items-end text-right sm:flex-1">
         <div>
-          <h1 className="mb-2 border-b-4 pb-4 font-display text-5xl sm:text-6xl">
+          <h1 className="font-display mb-2 border-b-4 pb-4 text-5xl sm:text-6xl">
             DUSSERT <br />
             Hugo
           </h1>
-          <p className="text-lg uppercase text-muted-foreground sm:text-xl">
+          <p className="text-muted-foreground text-lg uppercase sm:text-xl">
             Développeur
             <br />
             Web & Mobile

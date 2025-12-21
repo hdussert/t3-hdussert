@@ -19,7 +19,7 @@ const Iframe = forwardRef<HTMLIFrameElement, IframeProps>(
       <div className={cn("relative overflow-hidden", className)}>
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-black">
-            <Loader className="h-12 w-12 animate-spin text-white " />
+            <Loader className="h-12 w-12 animate-spin text-white" />
           </div>
         )}
         <iframe

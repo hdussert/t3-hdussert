@@ -18,14 +18,14 @@ const Experience = ({
     <Card className="mb-8 border-none sm:flex">
       <CardHeader className="z-20 flex p-4 sm:w-72 sm:flex-col sm:border-r sm:text-right">
         <div>
-          <p className="whitespace-nowrap font-display uppercase text-muted-foreground">
+          <p className="font-display text-muted-foreground whitespace-nowrap uppercase">
             {date}
           </p>
           <p className="font-display text-xl">{title}</p>
         </div>
         <div>
           <ExternalLink label={company} link={link} />
-          <p className="inline italic text-muted-foreground"> - {location}</p>
+          <p className="text-muted-foreground inline italic"> - {location}</p>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col justify-center gap-4 rounded-lg p-4">
