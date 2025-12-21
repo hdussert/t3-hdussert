@@ -8,6 +8,8 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    EMAIL_APP_PASSWORD: z.string().min(8),
+    EMAIL_USER: z.email(),
   },
 
   /**
@@ -25,6 +27,8 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    EMAIL_APP_PASSWORD: process.env.EMAIL_APP_PASSWORD,
+    EMAIL_USER: process.env.EMAIL_USER,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
