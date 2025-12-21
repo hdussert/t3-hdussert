@@ -2,7 +2,11 @@
 
 import nodemailer from "nodemailer";
 import { z } from "zod";
-import { formatZodErrors, type ActionResponse } from "~/actions/utils";
+import {
+  formatZodErrors,
+  RecaptchaToken,
+  type ActionResponse,
+} from "~/actions/utils";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -17,13 +21,37 @@ const emailSchema = z.object({
   subject: z.string().min(1),
   body: z.string().min(1),
 });
-
 export type EmailData = z.infer<typeof emailSchema>;
 
-export async function sendEmail(formData: EmailData): Promise<ActionResponse> {
-  try {
-    const validationResult = emailSchema.safeParse(formData);
+export type SendEmailFormData = EmailData & RecaptchaToken;
 
+export async function sendEmail(
+  formData: SendEmailFormData,
+): Promise<ActionResponse> {
+  try {
+    // Verify ReCAPTCHA token
+    const recaptchaResponse = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          secret: process.env.RECAPTCHA_SECRET_KEY!,
+          response: formData.recaptchaToken,
+        }),
+      },
+    );
+    const recaptchaResult = await recaptchaResponse.json();
+    if (!recaptchaResult.success || recaptchaResult.score < 0.5) {
+      return {
+        success: false,
+        message: "ReCAPTCHA verification failed",
+      };
+    }
+
+    const validationResult = emailSchema.safeParse(formData);
     if (!validationResult.success) {
       return {
         success: false,
@@ -36,21 +64,21 @@ export async function sendEmail(formData: EmailData): Promise<ActionResponse> {
 
     const mailOptions = {
       to: process.env.EMAIL_USER,
-      subject: `CONTACT: ${data.source}`,
+      subject: `New contact from your portfolio !`,
       html: `
-      <h1>${data.subject}</h1>
+      <p>From: ${data.source}</p>
+      <p>Subject: ${data.subject}</p>
+      <p>----------------Message----------------</p>
       <p>${data.body}</p>
       `,
     };
 
     const response = await transporter.sendMail(mailOptions);
-    console.log("Resend response:", response);
     return {
       success: true,
       message: "Email sent successfully",
     };
   } catch (error) {
-    console.log("Error sending email:", error);
     if (error instanceof z.ZodError) {
       return {
         success: false,

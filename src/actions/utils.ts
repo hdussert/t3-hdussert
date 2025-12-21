@@ -10,3 +10,5 @@ export type ActionResponse = {
 export const formatZodErrors = (error: z.ZodError) => {
   return z.flattenError(error).fieldErrors;
 };
+
+export type RecaptchaToken = { recaptchaToken: string };

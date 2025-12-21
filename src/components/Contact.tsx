@@ -1,5 +1,6 @@
 import { useActionState } from "react";
-import { EmailData, sendEmail } from "~/actions/send-email";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { sendEmail, SendEmailFormData } from "~/actions/send-email";
 import { ActionResponse } from "~/actions/utils";
 import Section from "~/components/Section";
 import SectionTitle from "~/components/SectionTitle";
@@ -13,17 +14,28 @@ const initialFormState: ActionResponse = {
 };
 
 const Contact = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [state, formAction, isPending] = useActionState<
     ActionResponse,
     FormData
   >(async (_: ActionResponse, formData: FormData) => {
-    const data: EmailData = {
-      source: formData.get("source") as string,
-      subject: formData.get("subject") as string,
-      body: formData.get("body") as string,
-    };
-
     try {
+      // ReCAPTCHA verification
+      if (!executeRecaptcha) {
+        return {
+          success: false,
+          message: "ReCAPTCHA not yet available",
+        };
+      }
+
+      const recaptchaToken = await executeRecaptcha("contact_form");
+
+      const data: SendEmailFormData = {
+        source: formData.get("source") as string,
+        subject: formData.get("subject") as string,
+        body: formData.get("body") as string,
+        recaptchaToken,
+      };
       const result = await sendEmail(data);
 
       if (result.success) {
