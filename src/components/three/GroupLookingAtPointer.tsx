@@ -4,12 +4,12 @@ import * as THREE from "three";
 
 type GroupLookingAtPointerProps = ThreeElements["group"] & {
   canvasRef: RefObject<HTMLCanvasElement | null>;
-  iframeRef?: RefObject<HTMLIFrameElement | null>;
+  iframeElement?: HTMLIFrameElement | null;
 };
 
 export const GroupLookingAtPointer = ({
   canvasRef,
-  iframeRef,
+  iframeElement,
   ...props
 }: GroupLookingAtPointerProps) => {
   const { camera } = useThree();
@@ -33,21 +33,23 @@ export const GroupLookingAtPointer = ({
   }, []);
 
   useEffect(() => {
-    if (!iframeRef?.current) return;
-    const _iframeRef = iframeRef.current; // Use a stable reference
+    if (!iframeElement) return;
+    const _iframeElement = iframeElement; // Use a stable reference
+
     const mouseEnterHandler = () => {
       setIsMouseOverIframe(true);
     };
     const mouseLeaveHandler = () => {
       setIsMouseOverIframe(false);
     };
-    _iframeRef.addEventListener("mouseenter", mouseEnterHandler);
-    _iframeRef.addEventListener("mouseleave", mouseLeaveHandler);
+
+    _iframeElement.addEventListener("mouseenter", mouseEnterHandler);
+    _iframeElement.addEventListener("mouseleave", mouseLeaveHandler);
     return () => {
-      _iframeRef.removeEventListener("mouseenter", mouseEnterHandler);
-      _iframeRef.removeEventListener("mouseleave", mouseLeaveHandler);
+      _iframeElement.removeEventListener("mouseenter", mouseEnterHandler);
+      _iframeElement.removeEventListener("mouseleave", mouseLeaveHandler);
     };
-  }, [iframeRef]);
+  }, [iframeElement]);
 
   useFrame(() => {
     if (groupRef.current && canvasRef.current) {

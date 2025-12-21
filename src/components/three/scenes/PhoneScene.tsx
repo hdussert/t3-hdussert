@@ -8,7 +8,7 @@ import {
   PerspectiveCamera,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Suspense, lazy, useRef } from "react";
+import { Suspense, lazy, useRef, useState } from "react";
 import * as THREE from "three";
 import Iframe from "~/components/Iframe";
 import Loader from "~/components/three/Loader";
@@ -36,7 +36,9 @@ const DEFAULT_URL =
 
 export default function PhoneScene({ url }: { url?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [iframeElement, setIframeElement] = useState<HTMLIFrameElement | null>(
+    null,
+  ); // Ref to the iframe inside the phone
 
   const camera = {
     fov: 45,
@@ -53,7 +55,7 @@ export default function PhoneScene({ url }: { url?: string }) {
         <Float floatIntensity={1}>
           <GroupLookingAtPointer
             canvasRef={canvasRef}
-            iframeRef={iframeRef}
+            iframeElement={iframeElement}
             position={[1, 0.4, 0]}
           >
             <Suspense fallback={<Loader />}>
@@ -68,7 +70,9 @@ export default function PhoneScene({ url }: { url?: string }) {
                 >
                   <Iframe
                     className="no-scrollbar mr-4 size-full pr-[-1rem]"
-                    ref={iframeRef}
+                    ref={(el) => {
+                      setIframeElement(el);
+                    }}
                     url={url || DEFAULT_URL}
                   />
                 </Html>
