@@ -1,10 +1,10 @@
-import { useFrame, useThree, type GroupProps } from "@react-three/fiber";
+import { useFrame, useThree, type ThreeElements } from "@react-three/fiber";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import * as THREE from "three";
 
-type GroupLookingAtPointerProps = GroupProps & {
-  canvasRef: RefObject<HTMLCanvasElement>;
-  iframeRef?: RefObject<HTMLIFrameElement>;
+type GroupLookingAtPointerProps = ThreeElements["group"] & {
+  canvasRef: RefObject<HTMLCanvasElement | null>;
+  iframeRef?: RefObject<HTMLIFrameElement | null>;
 };
 
 export const GroupLookingAtPointer = ({

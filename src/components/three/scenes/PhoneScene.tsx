@@ -9,7 +9,7 @@ import {
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, lazy, useRef } from "react";
-import { Vector3 } from "three";
+import * as THREE from "three";
 import Iframe from "~/components/Iframe";
 import Loader from "~/components/three/Loader";
 import { GroupLookingAtPointer } from "../GroupLookingAtPointer";
@@ -19,7 +19,7 @@ function AnimatedGroup({ children }: { children: React.ReactNode }) {
   const groupRef = useRef<THREE.Group>(null);
   useFrame(() => {
     if (groupRef.current) {
-      groupRef.current.scale.lerp(new Vector3(1, 1, 1), 0.1);
+      groupRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
     }
   });
   return (
@@ -46,7 +46,7 @@ export default function PhoneScene({ url }: { url?: string }) {
   } as const;
 
   return (
-    <div className="absolute bottom-[-20vh] left-0 right-0 top-0 hidden sm:block">
+    <div className="absolute top-0 right-0 bottom-[-20vh] left-0 hidden sm:block">
       <Canvas ref={canvasRef} camera={camera} className="touch-none">
         <PerspectiveCamera makeDefault {...camera} />
         <Environment preset="studio" />
@@ -64,10 +64,10 @@ export default function PhoneScene({ url }: { url?: string }) {
                   distanceFactor={1.17}
                   position={[0, 0, 0.08]}
                   scale={[1.23, 1.23, 1.0]}
-                  className="h-[900px] w-[430px] select-none overflow-hidden rounded-[55px] border-none bg-black" // 2.09433962264 (ratio)
+                  className="h-225 w-107.5 overflow-hidden rounded-[55px] border-none bg-black select-none" // 2.09433962264 (ratio)
                 >
                   <Iframe
-                    className="no-scrollbar mr-[16px] size-full pr-[-16px]"
+                    className="no-scrollbar mr-4 size-full pr-[-1rem]"
                     ref={iframeRef}
                     url={url || DEFAULT_URL}
                   />
