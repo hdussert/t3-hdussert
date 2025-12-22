@@ -1,20 +1,14 @@
 "use server";
 
-import nodemailer from "nodemailer";
+import { SendMailOptions } from "nodemailer";
 import { z } from "zod";
 import {
   formatZodErrors,
   RecaptchaToken,
   type ActionResponse,
 } from "~/actions/utils";
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_APP_PASSWORD,
-  },
-});
+import { sendEmailViaTransporter } from "~/lib/nodemailer";
+import { verifyRecaptcha } from "~/lib/recaptcha";
 
 const emailSchema = z.object({
   source: z.email(),
@@ -30,39 +24,11 @@ export async function sendEmail(
 ): Promise<ActionResponse> {
   try {
     // Verify ReCAPTCHA token
-    const recaptchaResponse = await fetch(
-      `https://www.google.com/recaptcha/api/siteverify`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          secret: process.env.RECAPTCHA_SECRET_KEY!,
-          response: formData.recaptchaToken,
-        }),
-      },
-    );
-    const recaptchaResult = await recaptchaResponse.json();
-    if (!recaptchaResult.success || recaptchaResult.score < 0.5) {
-      return {
-        success: false,
-        message: "ReCAPTCHA verification failed",
-      };
-    }
+    await verifyRecaptcha(formData.recaptchaToken);
 
-    const validationResult = emailSchema.safeParse(formData);
-    if (!validationResult.success) {
-      return {
-        success: false,
-        message: "Validation failed",
-        errors: formatZodErrors(validationResult.error),
-      };
-    }
+    const data = emailSchema.parse(formData);
 
-    const data = validationResult.data;
-
-    const mailOptions = {
+    const mailOptions: SendMailOptions = {
       to: process.env.EMAIL_USER,
       subject: `New contact from your portfolio !`,
       html: `
@@ -72,8 +38,8 @@ export async function sendEmail(
       <p>${data.body}</p>
       `,
     };
+    await sendEmailViaTransporter(mailOptions);
 
-    const response = await transporter.sendMail(mailOptions);
     return {
       success: true,
       message: "Email sent successfully",
