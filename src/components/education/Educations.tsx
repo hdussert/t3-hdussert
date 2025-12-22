@@ -5,10 +5,10 @@ import EDUCATIONS from "./education-data";
 const Educations = () => {
   return (
     <div>
-      <SectionTitle className="sm:w-72 sm:px-4 sm:text-right">
+      <SectionTitle className="text-center sm:w-72 sm:px-4 sm:text-right">
         Formations
       </SectionTitle>
-      <div className="no-scrollbar flex w-full flex-col overflow-y-scroll">
+      <div className="no-scrollbar flex w-full flex-col">
         {EDUCATIONS.map((education, i) => (
           <Education key={i} {...education} />
         ))}

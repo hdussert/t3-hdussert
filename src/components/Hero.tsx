@@ -17,7 +17,7 @@ const Hero = () => {
           </p>
         </div>
       </div>
-      <div className="text-muted-foreground sm:flex-1">
+      <div className="text-muted-foreground text-center sm:flex-1">
         <p className="text-balance italic sm:max-w-96">
           “In programming, the hard part isn&apos;t solving problems but
           deciding what problems to solve.”

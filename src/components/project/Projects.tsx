@@ -17,7 +17,7 @@ const Projects = () => {
     <div className="relative flex min-h-screen w-screen max-w-full justify-center">
       <Section
         id="projects"
-        className="flex h-full min-h-screen w-full flex-col items-center justify-center py-8 sm:flex-row"
+        className="flex h-full min-h-screen w-full flex-col items-center justify-center sm:flex-row"
       >
         <div className="flex flex-col items-center sm:flex-1">
           <SectionTitle>Projets</SectionTitle>

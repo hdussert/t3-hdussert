@@ -7,7 +7,10 @@ const SectionTitle = ({
   ...props
 }: HTMLAttributes<HTMLHeadingElement>) => {
   return (
-    <h2 className={cn("font-display mb-5 text-3xl", className)} {...props}>
+    <h2
+      className={cn("font-display mb-8 text-3xl sm:mb-12", className)}
+      {...props}
+    >
       {children}
     </h2>
   );

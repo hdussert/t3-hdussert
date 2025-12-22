@@ -16,9 +16,9 @@ const Experience = ({
 }: ExperienceProps) => {
   return (
     <Card className="mb-8 border-none sm:flex">
-      <CardHeader className="z-20 flex p-4 sm:w-72 sm:flex-col sm:border-r sm:text-right">
+      <CardHeader className="z-20 flex items-center p-0 sm:w-72 sm:flex-col sm:border-r sm:p-4 sm:text-right">
         <div>
-          <p className="font-display text-muted-foreground whitespace-nowrap uppercase">
+          <p className="font-display text-muted-foreground text-center whitespace-nowrap uppercase sm:text-left">
             {date}
           </p>
           <p className="font-display text-xl">{title}</p>
@@ -29,7 +29,7 @@ const Experience = ({
         </div>
       </CardHeader>
       <CardContent className="flex flex-col justify-center gap-4 rounded-lg p-4">
-        <ul className="ml-4 list-disc">
+        <ul className="ml-4 list-disc text-pretty">
           {description.map((point, index) => (
             <li key={index}>{point}</li>
           ))}

@@ -6,7 +6,7 @@ type BadgeListProps = {
 
 const BadgeList = ({ tags }: BadgeListProps) => {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap justify-center gap-2">
       {tags.map((tag) => (
         <Badge variant="outline" key={tag}>
           {tag}

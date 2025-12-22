@@ -71,7 +71,7 @@ const Contact = () => {
   );
 
   return (
-    <Section className="h-screen">
+    <Section>
       <SectionTitle className="text-center">Me contacter</SectionTitle>
       <form action={formAction} className="flex flex-col gap-4">
         <div className="flex gap-4">

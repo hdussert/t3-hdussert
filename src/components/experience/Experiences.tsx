@@ -5,7 +5,7 @@ import EXPERIENCES from "./experience-data";
 const Experiences = () => {
   return (
     <div>
-      <SectionTitle className="sm:w-72 sm:px-4 sm:text-right">
+      <SectionTitle className="text-center sm:w-72 sm:px-4 sm:text-right">
         Expériences
       </SectionTitle>
       {EXPERIENCES.map((experience) => (
