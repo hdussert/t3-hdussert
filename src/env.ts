@@ -8,6 +8,12 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+
+    // NODEMAILER
+    EMAIL_APP_PASSWORD: z.string().min(8),
+    EMAIL_USER: z.email(),
+
+    RECAPTCHA_SECRET_KEY: z.string().min(10),
   },
 
   /**
@@ -16,6 +22,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: z.string().min(10),
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
   },
 
@@ -25,6 +32,11 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    EMAIL_APP_PASSWORD: process.env.EMAIL_APP_PASSWORD,
+    EMAIL_USER: process.env.EMAIL_USER,
+
+    RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
