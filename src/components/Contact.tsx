@@ -1,5 +1,6 @@
 import { useActionState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { toast } from "sonner";
 import { EmailData, sendEmail, SendEmailFormData } from "~/actions/send-email";
 import { ActionResponse } from "~/actions/utils";
 import Section from "~/components/Section";
@@ -34,6 +35,7 @@ const Contact = () => {
       try {
         // ReCAPTCHA verification
         if (!executeRecaptcha) {
+          toast.error("Captcha error. Please try again later.");
           return {
             success: false,
             message: "ReCAPTCHA not yet available",
@@ -49,7 +51,7 @@ const Contact = () => {
         } as SendEmailFormData);
 
         if (result.success) {
-          // toast.success(result.message);
+          toast.success(result.message);
         }
 
         return {
@@ -57,6 +59,7 @@ const Contact = () => {
           data: initialFormState.data, // Reset form data on success
         };
       } catch (error) {
+        toast.error("An unexpected error occurred. Please try again later.");
         return {
           success: false,
           message: "An unexpected error occurred.",
