@@ -1,27 +1,80 @@
-# Create T3 App
+# T3-Hdussert
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+T3-Hdussert is a modern web application built with the T3 stack, leveraging Next.js, TypeScript, and React. The project includes features such as 3D rendering, email sending, and a responsive portfolio showcasing projects.
 
-## What's next? How do I make an app with this?
+---
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Table of Contents
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [License](#license)
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
+---
 
-## Learn More
+## Features
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- **3D Rendering**: Interactive 3D scenes using `@react-three/fiber` and `@react-three/drei`.
+- **Email Sending**: Server-side email functionality with validation using `zod` and ReCAPTCHA verification.
+- **TypeScript**: Strongly typed codebase for better developer experience.
+- **Next.js**: Server-side rendering, API routes, and optimized performance.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+---
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## Getting Started
 
-## How do I deploy this?
+### Prerequisites
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- Node.js (v16 or higher)
+- Yarn (preferred package manager)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/t3-hdussert.git
+   cd t3-hdussert
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   yarn install
+   ```
+
+3. Set up environment variables:
+
+   Create a `.env` file in the root directory and configure the required variables. Refer to the [Environment Variables](#environment-variables) section for details.
+
+4. Run the development server:
+
+   ```bash
+   yarn dev
+   ```
+
+---
+
+## Environment Variables
+
+The application requires the following environment variables:
+
+- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`: Your ReCAPTCHA site key.
+- `RECAPTCHA_SECRET_KEY`: Your ReCAPTCHA secret key.
+- `EMAIL_USER`: Gmail email address.
+- `EMAIL_APP_PASSWORD`: Gmail App password
+
+Ensure these variables are set in a `.env` file in the root directory.
+
+```env
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your-site-key
+RECAPTCHA_SECRET_KEY=your-secret-key
+EMAIL_USER=your-email@example.com
+EMAIL_APP_PASSWORD=your-emai-app-password
+```
+
+---
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
