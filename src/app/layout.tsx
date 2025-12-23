@@ -25,7 +25,7 @@ export default function RootLayout({
         className={`font-sans ${inter.variable} relative transition-colors`}
       >
         {children}
-        <Toaster />
+        <Toaster position="top-center" />
       </body>
     </html>
   );

@@ -52,11 +52,15 @@ const Contact = () => {
 
         if (result.success) {
           toast.success(result.message);
+          return {
+            ...result,
+            data: initialFormState.data, // Reset form data on success
+          };
         }
 
         return {
           ...result,
-          data: initialFormState.data, // Reset form data on success
+          data, // Keep form data on failure
         };
       } catch (error) {
         toast.error("An unexpected error occurred. Please try again later.");
