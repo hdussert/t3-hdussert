@@ -97,14 +97,6 @@
   scroll-behavior: smooth;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
 /* Custom Fonts */
 @font-face {
   font-family: Poppins;
@@ -132,5 +124,9 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  .grecaptcha-badge {
+    visibility: hidden;
   }
 }

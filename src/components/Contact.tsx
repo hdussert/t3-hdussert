@@ -35,10 +35,12 @@ const Contact = () => {
       try {
         // ReCAPTCHA verification
         if (!executeRecaptcha) {
-          toast.error("Captcha error. Please try again later.");
+          toast.error(
+            "ReCAPTCHA non disponible. Veuillez réessayer plus tard.",
+          );
           return {
             success: false,
-            message: "ReCAPTCHA not yet available",
+            message: "ReCAPTCHA not yet avable",
             data,
           };
         }
@@ -51,19 +53,20 @@ const Contact = () => {
         } as SendEmailFormData);
 
         if (result.success) {
-          toast.success(result.message);
+          toast.success("Email envoyé avec succès !");
           return {
             ...result,
             data: initialFormState.data, // Reset form data on success
           };
         }
 
+        toast.error("Une erreur est survenue lors de l'envoi de l'email.");
         return {
           ...result,
           data, // Keep form data on failure
         };
       } catch (error) {
-        toast.error("An unexpected error occurred. Please try again later.");
+        toast.error("Une erreur inattendue est survenue.");
         return {
           success: false,
           message: "An unexpected error occurred.",
@@ -127,6 +130,25 @@ const Contact = () => {
           {isPending ? "Envoi en cours..." : "Envoyer"}
         </Button>
       </form>
+      <p className="text-muted-foreground mt-6 max-w-96 text-center text-sm text-balance">
+        This site is protected by reCAPTCHA and the Google&nbsp;
+        <a
+          className="underline"
+          target="_blank"
+          href="https://policies.google.com/privacy"
+        >
+          Privacy Policy
+        </a>
+        &nbsp;and&nbsp;
+        <a
+          className="underline"
+          target="_blank"
+          href="https://policies.google.com/terms"
+        >
+          Terms of Service
+        </a>
+        &nbsp;apply.
+      </p>
     </Section>
   );
 };
