@@ -5,7 +5,7 @@ const PROJECTS: ProjectData[] = [
     title: "What Box",
     description:
       "(WIP) Application permettant d'inventorier et gérer ses boîtes de rangement à l'aide de QR codes. (nécessite un compte)",
-    url: "https://remem-box.vercel.app/",
+    url: "https://what-box.vercel.app/",
   },
   {
     title: "Chez Lyno",
