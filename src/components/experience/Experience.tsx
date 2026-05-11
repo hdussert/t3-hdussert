@@ -16,16 +16,16 @@ const Experience = ({
 }: ExperienceProps) => {
   return (
     <Card className="mb-8 border-none sm:flex">
-      <CardHeader className="z-20 flex items-center p-0 sm:w-72 sm:flex-col sm:border-r sm:p-4 sm:text-right">
+      <CardHeader className="z-20 flex items-center p-0 text-center sm:w-72 sm:flex-col sm:items-end sm:border-r sm:p-4 sm:text-right">
         <div>
-          <p className="font-display text-muted-foreground text-center whitespace-nowrap uppercase sm:text-left">
+          <p className="font-display text-muted-foreground whitespace-nowrap uppercase">
             {date}
           </p>
           <p className="font-display text-xl">{title}</p>
-        </div>
-        <div>
-          <ExternalLink label={company} link={link} />
-          <p className="text-muted-foreground inline italic"> - {location}</p>
+          <div className="mt-2">
+            <ExternalLink label={company} link={link} />
+            <p className="text-muted-foreground inline italic"> - {location}</p>
+          </div>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col justify-center gap-4 rounded-lg p-4">
