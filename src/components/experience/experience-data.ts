@@ -2,7 +2,7 @@ import type { ExperienceData } from "./experience-type";
 
 const EXPERIENCES: ExperienceData[] = [
   {
-    date: "Juil. 2022 - Juin 2024",
+    date: "Juil. 2022 - Juin 2025",
     title: "Software Engineer",
     company: "Dalma",
     link: "https://www.dalma.co/",
