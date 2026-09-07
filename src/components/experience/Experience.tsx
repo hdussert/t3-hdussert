@@ -28,8 +28,8 @@ const Experience = ({
           </div>
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col justify-center gap-4 rounded-lg p-4">
-        <ul className="ml-4 list-disc text-pretty">
+      <CardContent className="flex flex-2 flex-col justify-center gap-4 rounded-lg p-4">
+        <ul className="ml-4 flex list-disc flex-col gap-1 text-pretty">
           {description.map((point, index) => (
             <li key={index}>{point}</li>
           ))}
