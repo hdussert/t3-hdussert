@@ -27,7 +27,7 @@ const Iframe = ({ url, className, ref }: IframeProps) => {
         className="h-full w-[calc(100%+16px)]"
         src={url}
         onLoad={() => setIsLoading(false)}
-        sandbox="allow-same-origin allow-scripts"
+        sandbox="allow-same-origin allow-scripts allow-forms"
       />
     </div>
   );
