@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata = {
   title: "DUSSERT Hugo",
-  description: "Hugo Dussert's personal website",
+  description: "Hugo Dussert, développeur web.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
         className={`font-sans ${inter.variable} relative transition-colors`}
       >
