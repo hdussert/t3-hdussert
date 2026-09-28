@@ -9,8 +9,8 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
 
-    // NODEMAILER
-    EMAIL_APP_PASSWORD: z.string().min(8),
+    // RESEND
+    RESEND_API_KEY: z.string().min(1),
     EMAIL_USER: z.email(),
 
     RECAPTCHA_SECRET_KEY: z.string().min(10),
@@ -32,7 +32,7 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    EMAIL_APP_PASSWORD: process.env.EMAIL_APP_PASSWORD,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
     EMAIL_USER: process.env.EMAIL_USER,
 
     RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,

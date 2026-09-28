@@ -1,13 +1,13 @@
 "use server";
 
-import { SendMailOptions } from "nodemailer";
 import { z } from "zod";
 import {
   formatZodErrors,
   RecaptchaToken,
   type ActionResponse,
 } from "~/actions/utils";
-import { sendEmailViaTransporter } from "~/lib/nodemailer";
+import { env } from "~/env";
+import { resend } from "~/lib/resend";
 import { verifyRecaptcha } from "~/lib/recaptcha";
 
 const emailSchema = z.object({
@@ -28,17 +28,15 @@ export async function sendEmail(
 
     const data = emailSchema.parse(formData);
 
-    const mailOptions: SendMailOptions = {
-      to: process.env.EMAIL_USER,
-      subject: `New contact from your portfolio !`,
-      html: `
-      <p>From: ${data.source}</p>
-      <p>Subject: ${data.subject}</p>
-      <p>----------------Message----------------</p>
-      <p>${data.body}</p>
-      `,
-    };
-    await sendEmailViaTransporter(mailOptions);
+    const { error } = await resend.emails.send({
+      from: "Portfolio <portfolio@hdussert.com>",
+      to: [env.EMAIL_USER],
+      replyTo: data.source,
+      subject: `New contact from your portfolio: ${data.subject}`,
+      text: `From: ${data.source}\nSubject: ${data.subject}\n\n${data.body}`,
+    });
+    // Resend returns errors instead of throwing
+    if (error) throw new Error(error.message);
 
     return {
       success: true,
