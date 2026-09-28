@@ -11,6 +11,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, lazy, useRef, useState } from "react";
 import * as THREE from "three";
 import Iframe from "~/components/Iframe";
+import { PROJECTS } from "~/components/project";
 import Loader from "~/components/three/Loader";
 import { GroupLookingAtPointer } from "../GroupLookingAtPointer";
 const PhoneModel = lazy(() => import("../models/PhoneModel"));
@@ -29,10 +30,7 @@ function AnimatedGroup({ children }: { children: React.ReactNode }) {
   );
 }
 
-const DEFAULT_URL =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:3000"
-    : "https://hdussert.vercel.app";
+const DEFAULT_URL = PROJECTS[0]?.url || "https://hdussert.com";
 
 export default function PhoneScene({ url }: { url?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
