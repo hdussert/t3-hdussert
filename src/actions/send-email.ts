@@ -50,6 +50,7 @@ export async function sendEmail(
         errors: formatZodErrors(error),
       };
     }
+    console.error("sendEmail failed:", error);
     return {
       success: false,
       message: "An error occurred while sending the email",
