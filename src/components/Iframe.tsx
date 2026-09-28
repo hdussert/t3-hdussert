@@ -24,7 +24,7 @@ const Iframe = ({ url, className, ref }: IframeProps) => {
       )}
       <iframe
         ref={ref}
-        className="h-full w-[calc(100%+16px)]"
+        className="size-full"
         src={url}
         onLoad={() => setIsLoading(false)}
         sandbox="allow-same-origin allow-scripts allow-forms"

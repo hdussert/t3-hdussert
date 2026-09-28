@@ -67,7 +67,7 @@ export default function PhoneScene({ url }: { url?: string }) {
                   className="h-225 w-107.5 overflow-hidden rounded-[55px] border-none bg-black select-none" // 2.09433962264 (ratio)
                 >
                   <Iframe
-                    className="no-scrollbar mr-4 size-full pr-[-1rem]"
+                    className="size-full"
                     ref={(el) => {
                       setIframeElement(el);
                     }}
