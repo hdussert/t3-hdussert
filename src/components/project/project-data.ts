@@ -4,7 +4,7 @@ const PROJECTS: ProjectData[] = [
   {
     title: "What Box",
     description:
-      "(WIP) Listez le contenu de vos boîtes de rangement, collez-leur une étiquette QR, puis retrouvez n'importe quel objet en un instant. (nécessite un compte)",
+      "Listez le contenu de vos boîtes de rangement, imprimez leur une étiquette QR code, puis retrouvez n'importe quel objet en un instant.",
     url: "https://whatbox.hdussert.com/",
   },
   {
