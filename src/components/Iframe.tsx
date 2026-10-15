@@ -28,6 +28,8 @@ const Iframe = ({ url, className, ref }: IframeProps) => {
         src={url}
         onLoad={() => setIsLoading(false)}
         sandbox="allow-same-origin allow-scripts allow-forms"
+        // Lets the projects' copy buttons write to the clipboard
+        allow="clipboard-write"
       />
     </div>
   );

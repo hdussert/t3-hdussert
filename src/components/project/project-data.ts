@@ -19,6 +19,12 @@ const PROJECTS: ProjectData[] = [
       "Site de réservation une chambre d'hôtes à Noirmoutier. Design par Anne-Cécile Gohier",
     url: "https://les-hesperides-noirmoutier.vercel.app/",
   },
+  {
+    title: "Bingo!",
+    description:
+      "Un bingo à jouer entre amis sur téléphone : devinez ce qui va se passer pendant une soirée ou un voyage, puis cochez-le quand ça arrive.",
+    url: "https://bingo.hdussert.com/",
+  },
 ] as const;
 
 export default PROJECTS;
